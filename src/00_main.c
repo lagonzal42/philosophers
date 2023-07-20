@@ -6,7 +6,7 @@
 /*   By: larra <larra@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 12:53:45 by larra             #+#    #+#             */
-/*   Updated: 2023/07/18 16:43:10 by larra            ###   ########.fr       */
+/*   Updated: 2023/07/20 14:11:25 by larra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,14 @@
 int	main(int argc, char **argv)
 {
 	struct s_all	all;
+	//struct s_param	param;
 	int				err;
 	
 	err = 0;
-	err = check_args(argc, argv, &all.param)
-	if (err)	
+	//all.param = param;
+	if(check_args(argc, argv, &all.param))	
 		return (ft_error(1));
-	err = 
+	if (create_philos(&all))
+		return (ft_error(2));
+	
 }
