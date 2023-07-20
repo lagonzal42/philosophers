@@ -6,7 +6,7 @@
 #    By: larra <larra@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/18 13:41:25 by larra             #+#    #+#              #
-#    Updated: 2023/07/18 13:41:25 by larra            ###   ########.fr        #
+#    Updated: 2023/07/20 14:03:56 by larra            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,10 +19,12 @@ INCS = incs
 
 #files
 SRCS =	00_main\
-		01_check_args
+		01_check_args\
+		02_create_philos\
+		03_ft_error
 
-SRC = $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
-OBJ = $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_FILES)))
+SRC = $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRCS)))
+OBJ = $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRCS)))
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -pthread
@@ -34,17 +36,18 @@ all:$(NAME)
 $(NAME): $(OBJ)
 	$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
 
-$(OBJ_DIR)%.o: $(SRC_DIR)%.c | $(OBJF)
-	$(CC) $(CFLAGS) -I $(INCS) -c $< -o $@
-
-$(OBJF):
+$(OBJ): $(SRC) $(OBJF)
+	@$(CC) $(CFLAGS) -c $(SRC)
 	@mkdir -p $(OBJ_DIR)
+	@mv *.o $(OBJ_DIR)
+
+
 
 clean:
-	$(RM) $(OBJ_DIR)
+	@$(RM) $(OBJ_DIR)
 
 fclean:
-	$(RM) $(NAME)
+	@$(RM) $(NAME)
 
 re: fclean all
 
