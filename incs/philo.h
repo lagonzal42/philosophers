@@ -6,7 +6,7 @@
 /*   By: larra <larra@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 13:07:21 by larra             #+#    #+#             */
-/*   Updated: 2023/07/20 18:21:33 by larra            ###   ########.fr       */
+/*   Updated: 2023/08/10 20:40:43 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ typedef struct s_all
 	t_philo			*philos;
 	pthread_t		*threads;
 	pthread_mutex_t	*forks;
+	char			start;
+	char			stop;
 	unsigned int	go;
 	int				dead;
 }   t_all;

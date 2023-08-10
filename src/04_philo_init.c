@@ -6,13 +6,14 @@
 /*   By: larra <larra@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 16:23:02 by larra             #+#    #+#             */
-/*   Updated: 2023/08/10 18:57:25 by larra            ###   ########.fr       */
+/*   Updated: 2023/08/10 21:20:40 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incs/philo.h"
 
 void	action(void *arg);
+int		dead_check(t_all *all);	
 
 int	thread_creation(t_all *all)
 {
@@ -44,9 +45,17 @@ void    action(void *arg)
 	t_philo	*philo;
 
 	philo = ((t_philo *) arg);
-	while (philo->all->dead == 0 && (philo->param->eatend != philo->meal || philo->param->eatend == -1))
+	while (philo->all->end == 0)
 	{
-		
+		if (philo->all->start == 1)
+			start_eating(philo);
+		else
+			usleep(1000);
 	}
+	return;
+}
+
+int	dead_check(t_all *all)
+{
 
 }

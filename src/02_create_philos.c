@@ -6,7 +6,7 @@
 /*   By: larra <larra@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 12:23:47 by larra             #+#    #+#             */
-/*   Updated: 2023/07/31 00:04:40 by larra            ###   ########.fr       */
+/*   Updated: 2023/08/10 20:51:04 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ int	create_philos(t_all *all)
 	int	n;
 
 	n = 0;
+	all->start = 0;
+	all->stop = 0;
 	all->philos = malloc((all->param.philo_num) * sizeof(t_philo));
 	if (!all->philos)
 		return (1);
