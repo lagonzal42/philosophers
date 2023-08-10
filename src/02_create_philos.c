@@ -6,13 +6,14 @@
 /*   By: larra <larra@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 12:23:47 by larra             #+#    #+#             */
-/*   Updated: 2023/07/20 14:10:41 by larra            ###   ########.fr       */
+/*   Updated: 2023/07/31 00:04:40 by larra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incs/philo.h"
 
 void	philo_init(struct s_philo *philo, t_all *all, int n);
+void	nest_structs(t_all *all);
 
 int	create_philos(t_all *all)
 {
@@ -30,13 +31,14 @@ int	create_philos(t_all *all)
 	all->forks = malloc(all->param.philo_num * sizeof(pthread_mutex_t));
 	if (!all->forks)
 		return (ft_free(all));
+	nest_structs(all);
 	return (0);
 }
 
 void	philo_init(struct s_philo *philo, t_all *all, int n)
 {
 	philo->last_meal = 0;
-	philo->meal_count = 0;
+	philo->meal = 0;
 	philo->pos = n + 1;
 	philo->param = &all->param;
 	if (n == 0)
@@ -65,4 +67,16 @@ int	ft_free(t_all *all)
 	if (all->threads)
 		free (all->threads);
 	return (1);
+}
+
+void	nest_structs(t_all *all)
+{
+	int	n;
+
+	n = 0;
+	while (n < all->param.philo_num)
+	{
+		all->philos[n].all = all;
+		n++;
+	}
 }
