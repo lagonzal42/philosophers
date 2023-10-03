@@ -1,26 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   00_main.c                                          :+:      :+:    :+:   */
+/*   04_free_elements.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/06 12:53:45 by larra             #+#    #+#             */
-/*   Updated: 2023/10/03 16:35:47 by lagonzal         ###   ########.fr       */
+/*   Created: 2023/10/03 18:09:13 by lagonzal          #+#    #+#             */
+/*   Updated: 2023/10/03 19:09:37 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incs/philo.h"
 
-int	main(int argc, char **argv)
+void	free_table(t_philo *table, int n)
 {
-	struct s_param		params;
-	struct s_watcher	watcher;
-	
+	int		i;
+	t_philo	*tmp;
 
-	if (check_parameters(argc, argv, &params))
-		return (1);
-	watcher.param = &params;
-	if (create_philos(&watcher))
-		return (1);
+	i = 0;
+	tmp = table->right;
+	while (i < n)
+	{
+		pthread_mutex_destroy(table->fork);
+		free(table->fork);
+		free(table);
+		table = tmp;
+		tmp = tmp->right;
+		i++;
+	}
 }

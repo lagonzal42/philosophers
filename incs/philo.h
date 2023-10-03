@@ -6,7 +6,7 @@
 /*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 13:07:21 by larra             #+#    #+#             */
-/*   Updated: 2023/10/03 16:10:03 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/10/03 19:11:42 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ typedef struct s_philo
 	int					pos;
 	pthread_mutex_t		*fork;
 	t_param				*param;
-	struct s_watcher	*all;
+	pthread_mutex_t		*print_lock;
 }	t_philo;
 
 /*
@@ -82,12 +82,12 @@ parameters.
 
 typedef struct s_watcher
 {
-	t_param			*params;
+	t_param			*param;
 	t_philo			*table;
 	pthread_t		*threads;
 	char			start;
-	char			stop;
-	int				dead;
+	pthread_mutex_t	*print_lock;
+	char			dead;
 }	t_watcher;
 
 /*===============================01_CHECK_PARAMETERS=========================*/
@@ -97,5 +97,13 @@ int		check_parameters(int argc, char **argv, t_param *params);
 /*================================02_ERROR_MSG===============================*/
 
 void	ft_error_msg(char *error_msg);
+
+/*================================03_CREATE_PHILOS===========================*/
+
+int	create_philos(t_watcher *watcher);
+
+/*================================04_FREE_ELEMENTS===========================*/
+
+void	free_table(t_philo *table, int n);
 
 #endif
