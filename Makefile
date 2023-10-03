@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: larra <larra@student.42.fr>                +#+  +:+       +#+         #
+#    By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/18 13:41:25 by larra             #+#    #+#              #
-#    Updated: 2023/07/20 17:45:24 by larra            ###   ########.fr        #
+#    Updated: 2023/10/03 13:51:27 by lagonzal         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,10 +19,6 @@ INCS = incs
 
 #files
 SRCS =	00_main\
-		01_check_args\
-		02_create_philos\
-		03_ft_error\
-		04_philo_init
 
 SRC = $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRCS)))
 OBJ = $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRCS)))
@@ -37,7 +33,7 @@ $(NAME): $(OBJ)
 	$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
 
 $(OBJ): $(SRC) $(OBJF)
-	@$(CC) $(CFLAGS) -c $(SRC)
+	@$(CC) $(CFLAGS) -c $(SRC) -I $(INCS)
 	@mkdir -p $(OBJ_DIR)
 	@mv *.o $(OBJ_DIR)
 

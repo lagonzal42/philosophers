@@ -1,21 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   00_main.c                                          :+:      :+:    :+:   */
+/*   02_error_msg.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/06 12:53:45 by larra             #+#    #+#             */
-/*   Updated: 2023/10/03 16:10:41 by lagonzal         ###   ########.fr       */
+/*   Created: 2023/10/03 16:08:03 by lagonzal          #+#    #+#             */
+/*   Updated: 2023/10/03 16:09:07 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../incs/philo.h"
+static void	ft_putstr_fd(char *s, int fd);
+static int	ft_strlen(char *s);
 
-int	main(int argc, char **argv)
+void	ft_error_msg(char *error_msg)
 {
-	struct s_param	params;
+	ft_putstr_fd("Error. Invalid ", 2);
+	ft_putstr_fd(error_msg, 2);
+	ft_putstr_fd("\n", 2);
+}
 
-	check_parameters(argc, argv, &params);
-	
+static void	ft_putstr_fd(char *s, int fd)
+{
+	write(fd, s, ft_strlen(s));
+}
+
+static int	ft_strlen(char *s)
+{
+	int	n;
+
+	n = 0;
+	while (s && s[n])
+		n++;
+	return (n);
 }

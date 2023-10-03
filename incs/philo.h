@@ -6,7 +6,7 @@
 /*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 13:07:21 by larra             #+#    #+#             */
-/*   Updated: 2023/10/03 12:34:36 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/10/03 16:10:03 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,5 +89,13 @@ typedef struct s_watcher
 	char			stop;
 	int				dead;
 }	t_watcher;
+
+/*===============================01_CHECK_PARAMETERS=========================*/
+
+int		check_parameters(int argc, char **argv, t_param *params);
+
+/*================================02_ERROR_MSG===============================*/
+
+void	ft_error_msg(char *error_msg);
 
 #endif
