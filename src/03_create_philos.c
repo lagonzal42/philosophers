@@ -6,7 +6,7 @@
 /*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 16:20:49 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/10/03 19:09:56 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/10/03 19:39:23 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,16 @@
 t_philo	*philo_init(t_watcher *watcher, int n);
 void	take_a_seat(t_philo *table, t_philo *new, int n);
 
+/*
+This function uses the data in param that is nested in watcher to create the
+philo structures. It allocates memory for the mutexes, the threads and then
+creates a circular double linked list with the philosophers (as a round table).
+ARGS:
+	- watcher:	a pointer to the watcher struct. It is sent by the main to
+				complete the table inside of it.
+RETURN VALUES:
+	1 in case of error, 0 in case of success.
+*/
 
 int	create_philos(t_watcher *watcher)
 {
@@ -44,6 +54,19 @@ int	create_philos(t_watcher *watcher)
 	return (0);
 }
 
+/*
+This function is used to initialize the philosopher structure. It assignes
+NULL values to the pointers that, allocates and initializes the fork, 
+nests the param structure into the philo and assignes the common mutex.
+ARGS:
+	- watcher:	The watcher structure needed to get the params and the
+				print_lock.
+	- n:		The variable that indicates the position of the philosopher
+				in the table.	
+RETURN VALUES:
+	the philosopher in case of success, NULL in case of error
+*/
+
 static t_philo	*philo_init(t_watcher *watcher, int n)
 {
 	t_philo	*tmp;
@@ -55,7 +78,7 @@ static t_philo	*philo_init(t_watcher *watcher, int n)
 	tmp->right = NULL;
 	tmp->last_meal = 0;
 	tmp->meal = 0;
-	tmp->pos = n;
+	tmp->pos = n + 1;
 	tmp->fork = malloc(sizeof(pthread_mutex_t));
 	if (!tmp->fork)
 		return (free(tmp->fork), free(tmp), NULL);
@@ -64,6 +87,16 @@ static t_philo	*philo_init(t_watcher *watcher, int n)
 	tmp->param = watcher->param;
 	tmp->print_lock = &watcher->print_lock;
 }
+
+/*
+This function makes the pointer asignations to create the circular double
+linked list. (The round table).
+ARGS:
+	- table:	the circular double linked list.
+	- n:		the relative position in the table.
+RETURN VALUES:
+	void.
+*/
 
 void	take_a_seat(t_philo *table, t_philo *new, int n)
 {

@@ -6,13 +6,25 @@
 /*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 12:50:04 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/10/03 16:08:09 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/10/03 19:36:30 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incs/philo.h"
 
 static int	ft_atoi(const char *nptr);
+
+/*
+This fucntion checks that the ammount of parameters is correct and checks their
+value.
+ARGS:
+	- argc:		parameter from the main.
+	- argv: 	parameter from the main.
+	- params:	structure to save the parameters that have been introduced via
+				main.
+RETURN VALUES:
+	1 in case of error, 0 in case of success.
+*/
 
 int	check_parameters(int argc, char **argv, t_param *params)
 {
@@ -38,7 +50,17 @@ int	check_parameters(int argc, char **argv, t_param *params)
 	}
 	else
 		params->eatend = -1;
+	return (0);
 }
+
+/*
+This function imitates atoi. It takes a numbre in string format and returns it
+in int form.
+ARGS:
+	- nptr: A pointer to the string that will be converted.
+RETURN VALUES:
+	The same as atoi
+*/
 
 static int	ft_atoi(const char *nptr)
 {
