@@ -6,7 +6,7 @@
 #    By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/18 13:41:25 by larra             #+#    #+#              #
-#    Updated: 2023/10/03 13:51:27 by lagonzal         ###   ########.fr        #
+#    Updated: 2023/10/03 19:13:47 by lagonzal         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,10 @@ INCS = incs
 
 #files
 SRCS =	00_main\
+	01_check_parameters\
+	02_error_msg\
+	03_create_philos\
+	04_free_elements
 
 SRC = $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRCS)))
 OBJ = $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRCS)))
