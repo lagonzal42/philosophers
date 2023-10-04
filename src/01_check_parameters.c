@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   01_check_parameters.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: larra <larra@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 12:50:04 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/10/03 19:36:30 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/10/04 11:27:45 by larra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,24 +29,25 @@ RETURN VALUES:
 int	check_parameters(int argc, char **argv, t_param *params)
 {
 	if (argc < 5 || argc > 6)
-		return (ft_error_msg("number of parameters"), 1);
+		return (param_error_msg("number of parameters"), 1);
 	params->philo_num = ft_atoi(argv[1]);
 	if (params->philo_num < 1)
-		return (ft_error_msg("number of philosophers"), 1);
+		return (param_error_msg("number of philosophers"), 1);
 	params->t_to_die = ft_atoi(argv[2]);
 	if (params->t_to_die < 1)
-		return (ft_error_msg("time to die"), 1);
+		return (param_error_msg("time to die"), 1);
 	params->t_to_eat = ft_atoi(argv[3]);
 	if (params->t_to_eat < 1)
-		return (ft_error_msg("time to eat"), 1);
+		return (param_error_msg("time to eat"), 1);
 	params->t_to_slp = ft_atoi(argv[4]);
 	if (params->t_to_slp < 1)
-		return (ft_error_msg("time to sleep"), 1);
+		return (param_error_msg("time to sleep"), 1);
 	if (argc == 6)
 	{
 		params->eatend = ft_atoi(argv[5]);
 		if (params->eatend < 1)
-			return (ft_error_msg("number of times a philosopher must eat"), 1);
+			return (param_error_msg("number of times a philosopher must eat"),
+						1);
 	}
 	else
 		params->eatend = -1;

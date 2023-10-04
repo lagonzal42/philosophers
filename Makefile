@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+         #
+#    By: larra <larra@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/18 13:41:25 by larra             #+#    #+#              #
-#    Updated: 2023/10/03 19:13:47 by lagonzal         ###   ########.fr        #
+#    Updated: 2023/10/04 12:55:06 by larra            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,9 +42,9 @@ $(OBJ): $(SRC) $(OBJF)
 	@mv *.o $(OBJ_DIR)
 
 clean:
-	@$(RM) $(OBJ_DIR)
+	@$(RM) obj
 
-fclean:
+fclean: clean
 	@$(RM) $(NAME)
 
 re: fclean all

@@ -3,12 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   02_error_msg.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: larra <larra@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 16:08:03 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/10/03 19:25:30 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/10/04 11:26:41 by larra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include<unistd.h>
 
 static void	ft_putstr_fd(char *s, int fd);
 static int	ft_strlen(char *s);
@@ -21,7 +23,7 @@ RETURN VALUES:
 	void
 */
 
-void	ft_error_msg(char *error_msg)
+void	param_error_msg(char *error_msg)
 {
 	ft_putstr_fd("Error. Invalid ", 2);
 	ft_putstr_fd(error_msg, 2);

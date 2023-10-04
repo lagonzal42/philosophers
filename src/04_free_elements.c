@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   04_free_elements.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: larra <larra@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 18:09:13 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/10/03 19:41:21 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/10/04 11:03:54 by larra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,12 @@ void	free_table(t_philo *table, int n)
 		tmp = tmp->right;
 		i++;
 	}
+}
+
+void	free_watcher(t_watcher *watcher)
+{
+	free(watcher->threads);
+	free_table(watcher->table, watcher->param->philo_num);
+	pthread_mutex_destroy(watcher->print_lock);
+	free(watcher->print_lock);
 }

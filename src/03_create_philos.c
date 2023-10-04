@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   03_create_philos.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: larra <larra@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 16:20:49 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/10/03 19:39:23 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/10/04 12:22:48 by larra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incs/philo.h"
 
-t_philo	*philo_init(t_watcher *watcher, int n);
-void	take_a_seat(t_philo *table, t_philo *new, int n);
+static t_philo	*philo_init(t_watcher *watcher, int n);
+static void		take_a_seat(t_philo *table, t_philo *new, int n);
 
 /*
 This function uses the data in param that is nested in watcher to create the
@@ -37,6 +37,7 @@ int	create_philos(t_watcher *watcher)
 		return (1);
 	watcher->start = 0;
 	watcher->dead = 0;
+	watcher->start_time = 0;
 	watcher->print_lock = malloc(sizeof(pthread_mutex_t));
 	if (pthread_mutex_init(watcher->print_lock, NULL) == 0)
 		return (free(watcher->threads), 1);
@@ -77,6 +78,8 @@ static t_philo	*philo_init(t_watcher *watcher, int n)
 	tmp->left = NULL;
 	tmp->right = NULL;
 	tmp->last_meal = 0;
+	tmp->start = &watcher->start;
+	tmp->start_time = &watcher->start_time;
 	tmp->meal = 0;
 	tmp->pos = n + 1;
 	tmp->fork = malloc(sizeof(pthread_mutex_t));
@@ -85,7 +88,8 @@ static t_philo	*philo_init(t_watcher *watcher, int n)
 	if  (pthread_mutex_init(tmp->fork, NULL) != 0)
 		return (free(tmp), NULL);
 	tmp->param = watcher->param;
-	tmp->print_lock = &watcher->print_lock;
+	tmp->print_lock = watcher->print_lock;
+	return (tmp);
 }
 
 /*

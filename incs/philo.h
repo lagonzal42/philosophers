@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: larra <larra@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 13:07:21 by larra             #+#    #+#             */
-/*   Updated: 2023/10/03 19:11:42 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/10/04 12:35:23 by larra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ typedef struct s_philo
 	struct s_philo		*left;
 	struct s_philo		*right;
 	unsigned int		last_meal;
+	char				*start;
+	unsigned int		*start_time;
 	int					meal;
 	int					pos;
 	pthread_mutex_t		*fork;
@@ -85,6 +87,7 @@ typedef struct s_watcher
 	t_param			*param;
 	t_philo			*table;
 	pthread_t		*threads;
+	unsigned int	start_time;
 	char			start;
 	pthread_mutex_t	*print_lock;
 	char			dead;
@@ -92,18 +95,31 @@ typedef struct s_watcher
 
 /*===============================01_CHECK_PARAMETERS=========================*/
 
-int		check_parameters(int argc, char **argv, t_param *params);
+int				check_parameters(int argc, char **argv, t_param *params);
 
 /*================================02_ERROR_MSG===============================*/
 
-void	ft_error_msg(char *error_msg);
+void			param_error_msg(char *error_msg);
 
 /*================================03_CREATE_PHILOS===========================*/
 
-int	create_philos(t_watcher *watcher);
+int				create_philos(t_watcher *watcher);
 
 /*================================04_FREE_ELEMENTS===========================*/
 
-void	free_table(t_philo *table, int n);
+void			free_table(t_philo *table, int n);
+
+/*================================05_THREAD_CREATE===========================*/
+
+int thread_create(t_watcher *watcher);
+unsigned int    look_the_clock(unsigned int start);
+
+/*================================06_PHILO_ROUTINE===========================*/
+
+void    philo_wait_loop(void *philosopher);
+
+/*==============================07_WATCHER_ROUTINE===========================*/
+
+void    watcher_routine(void *watcher_info)
 
 #endif
