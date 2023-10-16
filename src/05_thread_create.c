@@ -3,14 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   05_thread_create.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: larra <larra@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 10:58:37 by larra             #+#    #+#             */
-/*   Updated: 2023/10/04 12:46:59 by larra            ###   ########.fr       */
+/*   Updated: 2023/10/06 09:35:23 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incs/philo.h"
+
+/*
+This functions creates the n threads that shall be passed as first parameter
+to the executable. This threads will do the routine of the philosophers (eat,
+sleep and think). Then it creates a watcher thread that will end when a
+philosopher dies or when all the philos are fed and will end the program when
+that happens.
+ARGS:
+    - watcher: a pointer to the watcher structure, already initialized.
+    - 
+*/
 
 int thread_create(t_watcher *watcher)
 {

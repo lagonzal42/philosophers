@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   04_free_elements.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: larra <larra@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 18:09:13 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/10/04 11:03:54 by larra            ###   ########.fr       */
+/*   Updated: 2023/10/05 15:37:59 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ their mutexes.
 ARGS:
 	- table:	the pointer to the circular double linked list.
 	- n:		the amount of philosophers that are already seated.
-RETURN VALUE.
+RETURN VALUE:
 	void.
 */
 
@@ -40,6 +40,13 @@ void	free_table(t_philo *table, int n)
 	}
 }
 
+/*
+This function frees all the memory that has been allocated for all the threads.
+ARGS:
+	- watcher:	a pointer to the watcher struct.
+RETURN VALUE:
+	void.
+*/
 void	free_watcher(t_watcher *watcher)
 {
 	free(watcher->threads);

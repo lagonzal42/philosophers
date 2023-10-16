@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: larra <larra@student.42.fr>                +#+  +:+       +#+         #
+#    By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/18 13:41:25 by larra             #+#    #+#              #
-#    Updated: 2023/10/04 12:55:06 by larra            ###   ########.fr        #
+#    Updated: 2023/10/05 17:51:18 by lagonzal         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,11 @@ SRCS =	00_main\
 	01_check_parameters\
 	02_error_msg\
 	03_create_philos\
-	04_free_elements
+	04_free_elements\
+	05_thread_create\
+	06_philo_routine\
+	07_watcher_routine\
+	u_printer
 
 SRC = $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRCS)))
 OBJ = $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRCS)))

@@ -6,7 +6,7 @@
 /*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 12:53:45 by larra             #+#    #+#             */
-/*   Updated: 2023/10/03 16:35:47 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/10/05 18:31:45 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,4 +23,5 @@ int	main(int argc, char **argv)
 	watcher.param = &params;
 	if (create_philos(&watcher))
 		return (1);
+	thread_create(&watcher);
 }

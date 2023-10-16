@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: larra <larra@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 13:07:21 by larra             #+#    #+#             */
-/*   Updated: 2023/10/04 12:35:23 by larra            ###   ########.fr       */
+/*   Updated: 2023/10/16 14:37:00 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,11 @@
 # include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>
+
+#define WT "\033[0;37m"
+#define GR "\033[0;32m"
+#define BL "\033[0;34m"
+#define RD "\033[0;31m"
 
 /*
 Param structure. This param structure saves the parameter data that is given
@@ -111,15 +116,20 @@ void			free_table(t_philo *table, int n);
 
 /*================================05_THREAD_CREATE===========================*/
 
-int thread_create(t_watcher *watcher);
+int 			thread_create(t_watcher *watcher);
 unsigned int    look_the_clock(unsigned int start);
 
 /*================================06_PHILO_ROUTINE===========================*/
 
-void    philo_wait_loop(void *philosopher);
+void   			philo_wait_loop(void *philosopher);
 
 /*==============================07_WATCHER_ROUTINE===========================*/
 
-void    watcher_routine(void *watcher_info)
+void    		watcher_routine(void *watcher_info);
+
+/*==============================07_WATCHER_ROUTINE===========================*/
+
+void			print_msg(pthread_mutex_t *print_lock, unsigned int st,
+							int pos, int op);
 
 #endif
