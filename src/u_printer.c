@@ -6,7 +6,7 @@
 /*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 12:11:22 by larra             #+#    #+#             */
-/*   Updated: 2023/10/05 18:27:56 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/10/24 10:20:04 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,9 @@ void	print_msg(pthread_mutex_t *print_lock, unsigned int st, int pos, int op)
 		printf("%s%dms %sphilo%d %sis thinking\n", GR, look_the_clock(st), BL,
 				pos, WT);
 	if (op == 5)
-		printf("%s%dms %sphilo%d %sis dead\n", GR, look_the_clock(st), BL,
-				pos, RD);
+		printf("%s%dms %sphilo%d %sis dead\n%s", GR, look_the_clock(st), BL,
+				pos, RD, WT);
 	if (op < 5)
 		pthread_mutex_unlock(print_lock);
+	
 }

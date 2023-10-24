@@ -6,7 +6,7 @@
 /*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 13:07:21 by larra             #+#    #+#             */
-/*   Updated: 2023/10/16 14:37:00 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/10/24 09:32:41 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ typedef struct s_philo
 	pthread_mutex_t		*fork;
 	t_param				*param;
 	pthread_mutex_t		*print_lock;
+	pthread_mutex_t		*param_lock;
+
 }	t_philo;
 
 /*
@@ -89,6 +91,7 @@ parameters.
 
 typedef struct s_watcher
 {
+	pthread_mutex_t	*param_lock;
 	t_param			*param;
 	t_philo			*table;
 	pthread_t		*threads;
@@ -122,6 +125,8 @@ unsigned int    look_the_clock(unsigned int start);
 /*================================06_PHILO_ROUTINE===========================*/
 
 void   			philo_wait_loop(void *philosopher);
+void    		wait_time(unsigned int wait_time);
+
 
 /*==============================07_WATCHER_ROUTINE===========================*/
 

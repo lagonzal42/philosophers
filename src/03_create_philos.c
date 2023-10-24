@@ -6,7 +6,7 @@
 /*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 16:20:49 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/10/16 14:37:04 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/10/18 19:53:04 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 static t_philo	*philo_init(t_watcher *watcher, int n);
 static void		take_a_seat(t_philo **table, t_philo *new, int n);
+int				watcher_create(t_watcher *watcher);
+
 
 /*
 This function uses the data in param that is nested in watcher to create the
@@ -32,16 +34,8 @@ int	create_philos(t_watcher *watcher)
 	t_philo	*tmp;
 
 	n = 0;
-	watcher->threads = malloc(watcher->param->philo_num * (sizeof(pthread_t)));
-	if (!watcher->threads)
+	if (watcher_create(watcher))
 		return (1);
-	watcher->start = 0;
-	watcher->dead = 0;
-	watcher->start_time = 0;
-	watcher->print_lock = malloc(sizeof(pthread_mutex_t));
-	if (pthread_mutex_init(watcher->print_lock, NULL) != 0)
-		return (free(watcher->threads), 1);
-	watcher->table = NULL;
 	while (n < watcher->param->philo_num)
 	{
 		tmp = philo_init(watcher, n);
@@ -52,6 +46,25 @@ int	create_philos(t_watcher *watcher)
 		take_a_seat(&watcher->table, tmp, n);
 		n++;
 	}
+	return (0);
+}
+
+int	watcher_create(t_watcher *watcher)
+{
+	watcher->threads = malloc(watcher->param->philo_num * (sizeof(pthread_t)));
+	if (!watcher->threads)
+		return (1);
+	watcher->start = 0;
+	watcher->dead = 0;
+	watcher->print_lock = malloc(sizeof(pthread_mutex_t));
+	if (pthread_mutex_init(watcher->print_lock, NULL) != 0)
+		return (free(watcher->threads), 1);
+	watcher->param_lock = malloc(sizeof(pthread_mutex_t));
+	if (pthread_mutex_init(watcher->param_lock, NULL) != 0)
+		return (free(watcher->threads)
+				,pthread_mutex_destroy(watcher->print_lock), free(watcher->print_lock)
+				, 1);
+	watcher->table = NULL;
 	return (0);
 }
 
@@ -89,6 +102,7 @@ static t_philo	*philo_init(t_watcher *watcher, int n)
 		return (free(tmp), NULL);
 	tmp->param = watcher->param;
 	tmp->print_lock = watcher->print_lock;
+	tmp->param_lock = watcher->param_lock;
 	return (tmp);
 }
 

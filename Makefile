@@ -6,7 +6,7 @@
 #    By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/18 13:41:25 by larra             #+#    #+#              #
-#    Updated: 2023/10/05 17:51:18 by lagonzal         ###   ########.fr        #
+#    Updated: 2023/10/24 09:40:46 by lagonzal         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,7 @@ SRC = $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRCS)))
 OBJ = $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRCS)))
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -pthread
+CFLAGS = -Wall -Wextra -Werror -pthread #-fsanitize=thread -g3
 RM = rm -fr
 
 all:$(NAME)
@@ -41,7 +41,7 @@ $(NAME): $(OBJ)
 	$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
 
 $(OBJ): $(SRC) $(OBJF)
-	@$(CC) $(CFLAGS) -c $(SRC) -I $(INCS)
+	@$(CC) $(CFLAGS) -c $(SRC) -I $(INCS) 
 	@mkdir -p $(OBJ_DIR)
 	@mv *.o $(OBJ_DIR)
 

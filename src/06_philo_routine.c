@@ -6,7 +6,7 @@
 /*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 11:36:59 by larra             #+#    #+#             */
-/*   Updated: 2023/10/16 14:37:15 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/10/24 10:16:27 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,23 @@ void	philo_wait_loop(void *philosopher)
 	t_philo *philo;
 
 	philo = (t_philo *)philosopher;
-	while (!*philo->start);
+	while (1)
+	{
+		pthread_mutex_lock(philo->print_lock);
+		if (*philo->start)
+		{
+			pthread_mutex_unlock(philo->print_lock);
+			break;
+		}
+		pthread_mutex_unlock(philo->print_lock);
+	}
 	philo_routine(philo);
 }
 
 void	philo_routine(t_philo *philo)
 {
 	if (philo->pos % 2 == 0)
-		usleep(1000);
+		usleep(500);
 	while (1)
 	{
 		pthread_mutex_lock(philo->right->fork);
@@ -36,12 +45,16 @@ void	philo_routine(t_philo *philo)
 		pthread_mutex_lock(philo->fork);
 		print_msg(philo->print_lock, *philo->start_time, philo->pos, 1);
 		print_msg(philo->print_lock, *philo->start_time, philo->pos, 2);
+		pthread_mutex_lock(philo->param_lock);
 		philo->last_meal = look_the_clock(*philo->start_time);
+		pthread_mutex_unlock(philo->param_lock);
 		wait_time(philo->param->t_to_eat);
+		pthread_mutex_lock(philo->param_lock);
 		philo->meal++;
-		print_msg(philo->print_lock, *philo->start_time, philo->pos, 3);
+		pthread_mutex_unlock(philo->param_lock);
 		pthread_mutex_unlock(philo->fork);
 		pthread_mutex_unlock(philo->right->fork);
+		print_msg(philo->print_lock, *philo->start_time, philo->pos, 3);
 		wait_time(philo->param->t_to_slp);
 		print_msg(philo->print_lock, *philo->start_time, philo->pos, 4);
 	}
@@ -57,7 +70,7 @@ void    wait_time(unsigned int wait_time)
 	waited_time = 0;
 	while (waited_time < wait_time)
 	{
-		usleep(200);
+		usleep(1000);
 		waited_time = look_the_clock(start_time);
 	}
 }
