@@ -6,7 +6,7 @@
 /*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 11:37:03 by larra             #+#    #+#             */
-/*   Updated: 2023/10/24 09:34:06 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/10/24 13:49:47 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,11 @@ int check_end(t_philo *table, t_param *parameters, unsigned int start_time,
 		if (table->meal == parameters->eatend)
 			fed++;
 		pthread_mutex_unlock(table->param_lock);
+		usleep(100);
 		table = table->right;
 		i++;
 	}
 	if (fed == parameters->philo_num)
-	{
-		pthread_mutex_lock(print_lock);
-		return (1);
-	}
+		return (pthread_mutex_lock(print_lock), 1);
 	return (0);
 }

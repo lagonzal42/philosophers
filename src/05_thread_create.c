@@ -6,7 +6,7 @@
 /*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 10:58:37 by larra             #+#    #+#             */
-/*   Updated: 2023/10/18 19:51:53 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/10/24 13:33:51 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,5 @@ unsigned int    look_the_clock(unsigned int start)
     struct timeval  tv;
 
     gettimeofday(&tv, NULL);
-    return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000) - start);
+    return (((tv.tv_sec * 1000) + (tv.tv_usec / 1000)) - start);
 }
