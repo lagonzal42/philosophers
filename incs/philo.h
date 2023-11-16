@@ -3,15 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lagonzal <larraingonzalez@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 13:07:21 by larra             #+#    #+#             */
-/*   Updated: 2023/10/24 09:32:41 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/11/16 20:52:02 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_H
 # define PHILO_H
+
+//INCLUDES
 
 # include <sys/time.h>
 # include <pthread.h>
@@ -19,10 +21,14 @@
 # include <stdio.h>
 # include <stdlib.h>
 
+//COLOR MACROS
+
 #define WT "\033[0;37m"
 #define GR "\033[0;32m"
 #define BL "\033[0;34m"
 #define RD "\033[0;31m"
+
+//STRUCTURES
 
 /*
 Param structure. This param structure saves the parameter data that is given
@@ -53,13 +59,22 @@ circular double linked list (table from s_all).
 	- right: 		a pointer to the philosopher that will be on his right in
 					the hypothetical table.
 	- last_meal:	the time that this philo last ate in ms.
+	- start:		a pointer to the start variable in the watcher struct. This
+					variable will be used to make sure that all the philos start
+					at the same time.
+	- start_time:	a pointer to the start_time variable in the watcher struct.
+					This variable will be used to make sure that all the philos
+					have the same start time of the program.
 	- meal: 		the times this philo has already eaten.
 	- pos:			the position of the philo on the table [1 - n].
 	- fork:			the fork the philosopher carries to the table.
 	- param:		a pointer to the parameters in order to check them if
 					necesary.
-	- watcher:		a pointer to the watcher structure. The watcher will tell
-					the program when to stop.
+	-print_lock:	a pointer to a mutex that will prevent the philos and the
+					watcher from printing at the same time.
+	- param_lock:	a pointer to a mutex that will prevent data races when
+					updating the last_meal and meal variables or checking them
+					in the watcher routine.
 */
 
 typedef struct s_philo
@@ -82,11 +97,17 @@ typedef struct s_philo
 Watcher structure. This watcher structure will be the one that will be passed
 to the watcher thread. It has access to the philo structures and to the
 parameters.
-	- params:	a pointer to the paramater structure.
-	- table:	a pointer to the table where the philos are seated.
-	- threads:	a pointer to the threads that will be launched as philosophers.
-	- start:	it will be used as a boolean to keep the program running.
-	- stop:		it will be used as a boolean to stop the program.
+	- param_lock:	a pointer to a mutex that will prevent data races when
+					updating the last_meal and meal variables or checking them
+					in the watcher routine.
+	- param:		a pointer to the paramater structure.
+	- table:		a pointer to the table where the philos are seated.
+	- threads:		a pointer to the threads that will be launched as
+					philosophers.
+	- start_time:	the time in milliseconds when the program started.
+	- start:		it will be used as a boolean to start the program.
+	- print_lock:	a pointer to a mutex that will prevent the philos and the
+					watcher from printing at the same time.
 */
 
 typedef struct s_watcher
@@ -98,8 +119,9 @@ typedef struct s_watcher
 	unsigned int	start_time;
 	char			start;
 	pthread_mutex_t	*print_lock;
-	char			dead;
 }	t_watcher;
+
+//PROTOTYPES
 
 /*===============================01_CHECK_PARAMETERS=========================*/
 
@@ -126,7 +148,6 @@ unsigned int    look_the_clock(unsigned int start);
 
 void   			philo_wait_loop(void *philosopher);
 void    		wait_time(unsigned int wait_time);
-
 
 /*==============================07_WATCHER_ROUTINE===========================*/
 

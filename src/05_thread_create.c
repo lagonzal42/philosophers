@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   05_thread_create.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lagonzal <larraingonzalez@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 10:58:37 by larra             #+#    #+#             */
-/*   Updated: 2023/10/24 13:33:51 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/11/16 20:33:47 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ philosopher dies or when all the philos are fed and will end the program when
 that happens.
 ARGS:
     - watcher: a pointer to the watcher structure, already initialized.
-    - 
+RETURN:
+    - 0 if everything went well, 1 if there was an error.
 */
 
 int thread_create(t_watcher *watcher)
@@ -42,6 +43,14 @@ int thread_create(t_watcher *watcher)
     pthread_join(watcher_thread, NULL);
     exit (0);
 }
+
+/*
+This function checks the time in milliseconds compared to the start time.
+ARGS:
+    - start: the time to be compared in miliseconds.
+RETURN:
+    - the time in milliseconds since the start time.
+*/
 
 unsigned int    look_the_clock(unsigned int start)
 {

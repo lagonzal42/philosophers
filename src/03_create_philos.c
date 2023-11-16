@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   03_create_philos.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lagonzal <larraingonzalez@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 16:20:49 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/10/18 19:53:04 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/11/16 20:49:39 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ int	watcher_create(t_watcher *watcher)
 	if (!watcher->threads)
 		return (1);
 	watcher->start = 0;
-	watcher->dead = 0;
 	watcher->print_lock = malloc(sizeof(pthread_mutex_t));
 	if (pthread_mutex_init(watcher->print_lock, NULL) != 0)
 		return (free(watcher->threads), 1);
